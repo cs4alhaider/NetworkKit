@@ -8,17 +8,17 @@
 import Foundation
 
 public enum ApiError: Error {
-    case timeout
-    case serverError
+    case timeout(error: Error?)
+    case serverError(error: Error?)
     case notFound(error: Error?)
     case unauthorized(error: Error?)
     case badRequest(error: Error?)
     case unprocessableEntity(error: Error?)
-    case decodingFailed
-    case nilData
-    case parametersShouldHaveValue
-    case unknown
-    case custom(message: String)
+    case decodingFailed(error: Error?)
+    case nilData(error: Error?)
+    case parametersShouldHaveValue(error: Error?)
+    case unknown(error: Error?)
+    case custom(message: String, error: Error?)
     
     init(statusCode: Int, error: Error?) {
         switch statusCode {
@@ -31,14 +31,14 @@ public enum ApiError: Error {
         case 422:
             self = .unprocessableEntity(error: error)
         case 500..<600:
-            self = .serverError
+            self = .serverError(error: error)
         default:
-            self = .unknown
+            self = .unknown(error: error)
         }
     }
     
-    init(message: String) {
-        self = .custom(message: message)
+    init(message: String, error: Error?) {
+        self = .custom(message: message, error: error)
     }
 }
 
@@ -66,7 +66,7 @@ extension ApiError: LocalizedError {
             return "parameters should have value"
         case .unknown:
             return "unknown error"
-        case .custom(let message):
+        case .custom(let message, _):
             return "Error with message: \(message)"
         }
     }

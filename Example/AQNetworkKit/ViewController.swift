@@ -45,31 +45,49 @@ class ViewController: UIViewController {
         // Adding the tableView to the main view with auto layout
         addUI()
         
+        // MARK:- Example 0 - Offline
+        
+//         Posts.getPostsFromJsonFile { [weak self] (result) in
+//             switch result {
+//             case .success(let data):
+//                 self?.data = data
+//                 self?.title = "\(data[0].title?.suffix(7) ?? "")"
+//             case .failure(let error):
+//                 print(error.localizedDescription)
+//             }
+//         }
+        
         // MARK:- Example 1 - Offline
-        //
-        // Posts.getPostsFromJsonFile { [weak self] (result) in
-        //     switch result {
-        //     case .success(let data):
-        //         self?.data = data
-        //         self?.title = "\(data[0].title?.suffix(7) ?? "")"
-        //     case .failure(let error):
-        //         print(error.localizedDescription)
-        //     }
-        // }
+        
+//         Posts.getPostsFromTextFile { [weak self] (result) in
+//             switch result {
+//             case .success(let data):
+//                 self?.data = data
+//                 self?.title = "\(data[0].title?.suffix(7) ?? "")"
+//             case .failure(let error):
+//                 print(error.localizedDescription)
+//             }
+//         }
         
         
         // MARK:- Example 2 - GET
         //
-        Posts.getPosts { [weak self] (result) in
-            switch result {
-            case .success(let data):
-                self?.data = data
-                self?.title = "\(data[0].title?.suffix(7) ?? "")"
-            case .failure(let error):
-                print(error.localizedDescription)
+//        Posts.getPosts { [weak self] (result) in
+//            switch result {
+//            case .success(let data):
+//                self?.data = data
+//                self?.title = "\(data[0].title?.suffix(7) ?? "")"
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+        
+        Posts.getPost(with: 2) { [weak self] in
+            guard let self = self else { return }
+            if case .success(let post) = $0 {
+                self.data = post
             }
         }
-        
         
         // MARK:- Example 3 - GET
         //

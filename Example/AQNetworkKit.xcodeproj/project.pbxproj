@@ -18,6 +18,7 @@
 		DDB857A9230CD40600DCD392 /* Posts.json in Resources */ = {isa = PBXBuildFile; fileRef = DDB857A8230CD40600DCD392 /* Posts.json */; };
 		DDB857AB230CD42200DCD392 /* Router+Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB857AA230CD42200DCD392 /* Router+Placeholder.swift */; };
 		DDB857AF230CD46200DCD392 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB857AE230CD46200DCD392 /* Post.swift */; };
+		F3ABEFFA24C7D7D600FD1DDB /* Posts.txt in Resources */ = {isa = PBXBuildFile; fileRef = F3ABEFF924C7D7D600FD1DDB /* Posts.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		DDB857AA230CD42200DCD392 /* Router+Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Router+Placeholder.swift"; sourceTree = "<group>"; };
 		DDB857AE230CD46200DCD392 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		E8C3B72B485A2E41DE5162B3 /* Pods_AQNetworkKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AQNetworkKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3ABEFF924C7D7D600FD1DDB /* Posts.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Posts.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				DDB857A8230CD40600DCD392 /* Posts.json */,
+				F3ABEFF924C7D7D600FD1DDB /* Posts.txt */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
@@ -288,6 +291,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3ABEFFA24C7D7D600FD1DDB /* Posts.txt in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				DDB857A9230CD40600DCD392 /* Posts.json in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,

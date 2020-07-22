@@ -10,6 +10,8 @@ import Foundation
 public enum FileExtension {
     /// `".json"`
     case json
+    /// `".txt"`
+    case txt
     
     var value: String {
         return String(describing: self)

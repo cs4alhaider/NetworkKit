@@ -7,10 +7,10 @@
 
 import Foundation
 
-public final class DataService {
+public final class NetworkService {
     
     private init() {}
-    static let shared = DataService()
+    static let shared = NetworkService()
     
     // MARK:- public methods
     
@@ -19,7 +19,7 @@ public final class DataService {
     /// - Parameters:
     ///   - endpoint: Endpoint
     ///   - completion: (Result<Data, Error>) -> Void
-    public func requestDataResult(endpoint: Endpoint, completion: @escaping DataResult) {
+    public func request(endpoint: Endpoint, completion: @escaping DataResult) {
         dataResponse(endpoint: endpoint, completion: completion)
     }
     
@@ -28,7 +28,7 @@ public final class DataService {
     /// - Parameters:
     ///   - endpoint: Endpoint
     ///   - completion: (Result<T, Error>) -> Void
-    public func requestDecodedResult<T: Decodable>(endpoint: Endpoint, completion: @escaping DecodedResult<T>) {
+    public func request<T: Decodable>(endpoint: Endpoint, completion: @escaping DecodedResult<T>) {
         decodedResponse(endpoint: endpoint, completion: completion)
     }
     
@@ -38,7 +38,7 @@ public final class DataService {
     /// - Parameters:
     ///   - endpoint: Endpoint
     ///   - completion: (Result<String, Error>) -> Void
-    public func requestStringResult(endpoint: Endpoint, completion: @escaping StringResult) {
+    public func request(endpoint: Endpoint, completion: @escaping StringResult) {
         stringResponse(endpoint: endpoint, completion: completion)
     }
 }
@@ -47,7 +47,7 @@ public final class DataService {
 // MARK:- private methods
 // -----------------------
 
-private extension DataService {
+private extension NetworkService {
     
     /// The main method to hit the api
     ///
@@ -78,13 +78,23 @@ private extension DataService {
         }
         #endif
         
+        let session = URLSession(configuration: endpoint.session)
+        
         // starting the request task asynchronous
-        URLSession.shared.dataTask(with: urlRequest(endpoint: endpoint)) { (data, response, error) in
+        let task = session.dataTask(with: urlRequest(endpoint: endpoint)) { (data, response, error) in
+            
+            if let error = error {
+                DispatchQueue.main.async {
+                    completion(.failure(error))
+                }
+                return
+            }
+            
             
             // check for a response objcet
             guard let response = response as? HTTPURLResponse else {
                 DispatchQueue.main.async {
-                    completion(.failure(ApiError.timeout))
+                    completion(.failure(ApiError(message: "HTTP URL Response Error", error: nil)))
                 }
                 return
             }
@@ -92,15 +102,15 @@ private extension DataService {
             // check for a successful status code
             guard Array(200..<300).contains(response.statusCode) else {
                 DispatchQueue.main.async {
-                    completion(.failure(ApiError(statusCode: response.statusCode, error: ApiError(message: "Error"))))
+                    completion(.failure(ApiError(statusCode: response.statusCode, error: ApiError(message: "Error: status code is \(response.statusCode)", error: nil))))
                 }
                 return
             }
             
             // check for response body
-            guard let data = data, response.statusCode != 204 else {
+            guard let data = data else {
                 DispatchQueue.main.async {
-                    completion(.failure(ApiError.nilData))
+                    completion(.failure(ApiError.nilData(error: nil)))
                 }
                 return
             }
@@ -122,7 +132,9 @@ private extension DataService {
             
             completion(.success(data))
             
-            }.resume()
+        }
+        
+        task.resume()
     }
     
     private func fromLocalJSONFile(endpoint: Endpoint, completion: @escaping DataResult) {
@@ -166,7 +178,7 @@ private extension DataService {
 
 // MARK:- String Response
 
-private extension DataService {
+private extension NetworkService {
     
     private func stringResponse(endpoint: Endpoint, completion: @escaping StringResult) {
         dataResponse(endpoint: endpoint) { (result) in
@@ -187,7 +199,7 @@ private extension DataService {
 
 // MARK:- Decoded Response
 
-private extension DataService {
+private extension NetworkService {
     
     private func decodedResponse<T: Codable>(endpoint: Endpoint, completion: @escaping DecodedResult<T>) {
         dataResponse(endpoint: endpoint) { (result) in
@@ -213,22 +225,20 @@ private extension DataService {
         // try to parse response body into object
         do {
             let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
             let object = try decoder.decode(T.self, from: data)
             DispatchQueue.main.async {
                 completion(.success(object))
             }
         } catch let error {
-            print("🚨 decoding failed" + error.localizedDescription)
             DispatchQueue.main.async {
-                completion(.failure(ApiError.decodingFailed))
+                completion(.failure(error))
             }
         }
     }
 }
 
 
-private extension DataService {
+private extension NetworkService {
     
     // MARK:- Build the url request
     
@@ -246,14 +256,14 @@ private extension DataService {
         }
         request.httpMethod = endpoint.method.name
         request.allHTTPHeaderFields = endpoint.defaultHeaders
-        request.httpShouldHandleCookies = false
+        request.httpShouldHandleCookies = endpoint.httpShouldHandleCookies
         request.timeoutInterval = endpoint.timeoutInterval
         return request
     }
 }
 
 
-private extension DataService {
+private extension NetworkService {
     
     // MARK:- Append the parameters with the URL
     
@@ -263,22 +273,11 @@ private extension DataService {
             fatalError("The BASE URL provided is not a valid url")
         }
         
-        // convert the parameters data into dictionary
-        guard let parameters = parameters else {
+        if let parameters = parameters {
+            // Adding the url query
+            return baseUrl.addingURLQuery(parameters)
+        } else {
             return baseUrl
         }
-        
-        // create the url query
-        var components = URLComponents(url: baseUrl, resolvingAgainstBaseURL: true)
-        components?.queryItems = parameters.map { element in
-            URLQueryItem(name: element.key, value: String(describing: element.value))
-        }
-        
-        guard let url = components?.url else {
-            return baseUrl
-        }
-        
-        return url
     }
-    
 }

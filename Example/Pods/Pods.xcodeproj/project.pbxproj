@@ -18,7 +18,7 @@
 		DD31654F230CD206003DA5E8 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD31654E230CD206003DA5E8 /* Endpoint.swift */; };
 		DD316551230CD22D003DA5E8 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD316550230CD22D003DA5E8 /* HTTPMethod.swift */; };
 		DD316553230CD23F003DA5E8 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD316552230CD23F003DA5E8 /* Path.swift */; };
-		DD316555230CD25A003DA5E8 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD316554230CD25A003DA5E8 /* DataService.swift */; };
+		DD316555230CD25A003DA5E8 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD316554230CD25A003DA5E8 /* NetworkService.swift */; };
 		DD316557230CD27D003DA5E8 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD316556230CD27D003DA5E8 /* ApiError.swift */; };
 		DD316559230CD29A003DA5E8 /* FileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD316558230CD29A003DA5E8 /* FileError.swift */; };
 		DD31655F230CD2C4003DA5E8 /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD31655E230CD2C4003DA5E8 /* FileExtension.swift */; };
@@ -26,6 +26,13 @@
 		DD316565230CD331003DA5E8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD316564230CD331003DA5E8 /* Router.swift */; };
 		DD316567230CD357003DA5E8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD316566230CD357003DA5E8 /* Extensions.swift */; };
 		DDB857B2230CD6BC00DCD392 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB857B1230CD6BC00DCD392 /* Empty.swift */; };
+		F3ABEFE824C7D54E00FD1DDB /* Extension+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABEFE724C7D54E00FD1DDB /* Extension+URL.swift */; };
+		F3ABEFEA24C7D59300FD1DDB /* Extension+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABEFE924C7D59300FD1DDB /* Extension+Error.swift */; };
+		F3ABEFEE24C7D5D600FD1DDB /* Extension+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABEFED24C7D5D600FD1DDB /* Extension+Array.swift */; };
+		F3ABEFF024C7D67800FD1DDB /* Extension+Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABEFEF24C7D67800FD1DDB /* Extension+Collection.swift */; };
+		F3ABEFF424C7D6E500FD1DDB /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABEFF324C7D6E500FD1DDB /* Extension+String.swift */; };
+		F3ABEFF624C7D70700FD1DDB /* Extension+Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABEFF524C7D70700FD1DDB /* Extension+Encodable.swift */; };
+		F3ABEFF824C7D73A00FD1DDB /* Extension+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3ABEFF724C7D73A00FD1DDB /* Extension+Dictionary.swift */; };
 		FB6D9D04242F2FF1E637937F7900FE25 /* AQNetworkKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B791576A7696969A31F8A4D4314955B9 /* AQNetworkKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -79,7 +86,7 @@
 		DD31654E230CD206003DA5E8 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Endpoint.swift; path = AQNetworkKit/Classes/Endpoint.swift; sourceTree = "<group>"; };
 		DD316550230CD22D003DA5E8 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HTTPMethod.swift; path = AQNetworkKit/Classes/HTTPMethod.swift; sourceTree = "<group>"; };
 		DD316552230CD23F003DA5E8 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Path.swift; path = AQNetworkKit/Classes/Path.swift; sourceTree = "<group>"; };
-		DD316554230CD25A003DA5E8 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DataService.swift; path = AQNetworkKit/Classes/DataService.swift; sourceTree = "<group>"; };
+		DD316554230CD25A003DA5E8 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkService.swift; path = AQNetworkKit/Classes/NetworkService.swift; sourceTree = "<group>"; };
 		DD316556230CD27D003DA5E8 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ApiError.swift; path = AQNetworkKit/Classes/ApiError.swift; sourceTree = "<group>"; };
 		DD316558230CD29A003DA5E8 /* FileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FileError.swift; path = AQNetworkKit/Classes/FileError.swift; sourceTree = "<group>"; };
 		DD31655E230CD2C4003DA5E8 /* FileExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FileExtension.swift; path = AQNetworkKit/Classes/FileExtension.swift; sourceTree = "<group>"; };
@@ -89,6 +96,13 @@
 		DDB857B1230CD6BC00DCD392 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Empty.swift; path = AQNetworkKit/Classes/Empty.swift; sourceTree = "<group>"; };
 		E09D7882441F3EF671C9538FFF3658C9 /* Pods-AQNetworkKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AQNetworkKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		E59FBBEC67D5122D809FD6A3A4B8BC70 /* Pods_AQNetworkKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AQNetworkKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3ABEFE724C7D54E00FD1DDB /* Extension+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Extension+URL.swift"; path = "AQNetworkKit/Classes/Extension+URL.swift"; sourceTree = "<group>"; };
+		F3ABEFE924C7D59300FD1DDB /* Extension+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Extension+Error.swift"; path = "AQNetworkKit/Classes/Extension+Error.swift"; sourceTree = "<group>"; };
+		F3ABEFED24C7D5D600FD1DDB /* Extension+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Extension+Array.swift"; path = "AQNetworkKit/Classes/Extension+Array.swift"; sourceTree = "<group>"; };
+		F3ABEFEF24C7D67800FD1DDB /* Extension+Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Extension+Collection.swift"; path = "AQNetworkKit/Classes/Extension+Collection.swift"; sourceTree = "<group>"; };
+		F3ABEFF324C7D6E500FD1DDB /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Extension+String.swift"; path = "AQNetworkKit/Classes/Extension+String.swift"; sourceTree = "<group>"; };
+		F3ABEFF524C7D70700FD1DDB /* Extension+Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Extension+Encodable.swift"; path = "AQNetworkKit/Classes/Extension+Encodable.swift"; sourceTree = "<group>"; };
+		F3ABEFF724C7D73A00FD1DDB /* Extension+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Extension+Dictionary.swift"; path = "AQNetworkKit/Classes/Extension+Dictionary.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,14 +141,21 @@
 				DD31654E230CD206003DA5E8 /* Endpoint.swift */,
 				DD316550230CD22D003DA5E8 /* HTTPMethod.swift */,
 				DD316552230CD23F003DA5E8 /* Path.swift */,
-				DD316554230CD25A003DA5E8 /* DataService.swift */,
+				DD316554230CD25A003DA5E8 /* NetworkService.swift */,
 				DD316556230CD27D003DA5E8 /* ApiError.swift */,
 				DD316558230CD29A003DA5E8 /* FileError.swift */,
 				DD31655E230CD2C4003DA5E8 /* FileExtension.swift */,
 				DD316562230CD317003DA5E8 /* Typealias.swift */,
 				DD316564230CD331003DA5E8 /* Router.swift */,
-				DD316566230CD357003DA5E8 /* Extensions.swift */,
 				DDB857B1230CD6BC00DCD392 /* Empty.swift */,
+				DD316566230CD357003DA5E8 /* Extensions.swift */,
+				F3ABEFE724C7D54E00FD1DDB /* Extension+URL.swift */,
+				F3ABEFE924C7D59300FD1DDB /* Extension+Error.swift */,
+				F3ABEFED24C7D5D600FD1DDB /* Extension+Array.swift */,
+				F3ABEFEF24C7D67800FD1DDB /* Extension+Collection.swift */,
+				F3ABEFF724C7D73A00FD1DDB /* Extension+Dictionary.swift */,
+				F3ABEFF324C7D6E500FD1DDB /* Extension+String.swift */,
+				F3ABEFF524C7D70700FD1DDB /* Extension+Encodable.swift */,
 			);
 			name = AQNetworkKit;
 			path = ../..;
@@ -415,18 +436,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3ABEFEA24C7D59300FD1DDB /* Extension+Error.swift in Sources */,
 				DD31654F230CD206003DA5E8 /* Endpoint.swift in Sources */,
 				DD316563230CD317003DA5E8 /* Typealias.swift in Sources */,
+				F3ABEFF424C7D6E500FD1DDB /* Extension+String.swift in Sources */,
 				DD316565230CD331003DA5E8 /* Router.swift in Sources */,
+				F3ABEFEE24C7D5D600FD1DDB /* Extension+Array.swift in Sources */,
 				8F902771E352A12F1879BF5EBFFFB3BA /* AQNetworkKit-dummy.m in Sources */,
 				DD316553230CD23F003DA5E8 /* Path.swift in Sources */,
 				DDB857B2230CD6BC00DCD392 /* Empty.swift in Sources */,
 				DD31655F230CD2C4003DA5E8 /* FileExtension.swift in Sources */,
+				F3ABEFF024C7D67800FD1DDB /* Extension+Collection.swift in Sources */,
 				DD316551230CD22D003DA5E8 /* HTTPMethod.swift in Sources */,
-				DD316555230CD25A003DA5E8 /* DataService.swift in Sources */,
+				DD316555230CD25A003DA5E8 /* NetworkService.swift in Sources */,
 				DD316557230CD27D003DA5E8 /* ApiError.swift in Sources */,
+				F3ABEFE824C7D54E00FD1DDB /* Extension+URL.swift in Sources */,
 				DD316567230CD357003DA5E8 /* Extensions.swift in Sources */,
 				DD316559230CD29A003DA5E8 /* FileError.swift in Sources */,
+				F3ABEFF624C7D70700FD1DDB /* Extension+Encodable.swift in Sources */,
+				F3ABEFF824C7D73A00FD1DDB /* Extension+Dictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,11 +12,22 @@ public protocol Endpoint {
     
     // MARK:- Properties
     
+    /// A configuration object that defines behavior and policies for a URL session.
+    ///
+    /// The default configration is:
+    ///
+    /// ```
+    /// var session: URLSessionConfiguration {
+    ///     .default
+    /// }
+    /// ```
+    /// And you can override this and build your own configurations such as adding ssl pinning and others stuff.
+    var session: URLSessionConfiguration { get }
+    
     /// The base url for your rest api
     var baseURL: String { get }
     
-    /// The last path component to the endpoint. will be appended to the base url in the service
-    /// or a bundle url for a local file
+    /// The last path component to the endpoint. will be appended to the base url in the service or a bundle url for a local file
     var pathURL: Path { get }
     
     /// The default encoded parameters
@@ -26,6 +37,19 @@ public protocol Endpoint {
     var parameters: [String: Any]? { get }
     
     /// The default HTTP headers to be appended in the request
+    ///
+    /// Default value is:
+    ///
+    ///```
+    ///  var defaultHeaders: [String: String] {
+    ///     var header: [String: String] = [:]
+    ///     var allHeaders = headers ?? [String: String]()
+    ///     header["Content-Type"] = "application/json"
+    ///     header["Accept"] = "application/json"
+    ///     allHeaders += header
+    ///     return allHeaders
+    ///  }
+    ///```
     var defaultHeaders: [String: String] { get }
     
     /// The additional HTTP headers to be appended in the defaultHeaders
@@ -34,10 +58,13 @@ public protocol Endpoint {
     /// Http method as specified by the server
     var method: HTTPMethod { get }
     
-    /// The timeout interval of the request
+    /// The timeout interval of the request, default is `30`
     var timeoutInterval: TimeInterval { get }
     
-    /// Determine if you want to print the response in the consol or not for DEBUG mode
+    /// Whether cookies will be sent with and set for this request, default is `false`
+    var httpShouldHandleCookies: Bool { get }
+    
+    /// Determine if you want to print the response in the consol or not for `DEBUG` mode, default is `true`
     var isPrintable: Bool { get }
     
     
@@ -48,21 +75,21 @@ public protocol Endpoint {
     /// - Parameters:
     ///   - endpoint: Endpoint
     ///   - completion: (Result<Data, Error>) -> Void
-    func requestDataResult(completion: @escaping DataResult)
+    func request(completion: @escaping DataResult)
     
     /// Request decoded object result from the provided endpoint details
     ///
     /// - Parameters:
     ///   - endpoint: Endpoint
     ///   - completion: (Result<T, Error>) -> Void
-    func requestDecodedResult<T: Codable>(completion: @escaping DecodedResult<T>)
+    func request<T: Codable>(completion: @escaping DecodedResult<T>)
     
     /// Request string result from the provided endpoint details
     ///
     /// - Parameters:
     ///   - endpoint: Endpoint
     ///   - completion: (Result<String, Error>) -> Void
-    func requestStringResult(completion: @escaping StringResult)
+    func request(completion: @escaping StringResult)
 }
 
 // Extending the protocol gives the advantage of declaring a function and provide the default implementation for it.
@@ -70,6 +97,10 @@ public protocol Endpoint {
 
 // MARK:- Default values
 public extension Endpoint {
+    
+    var session: URLSessionConfiguration {
+        .default
+    }
     
     /// NOTE: you should not override this property
     var url: String {
@@ -87,7 +118,7 @@ public extension Endpoint {
         ///
         /// - Example:
         ///```
-        /// import DataLayerKit
+        /// import AQNetworkKit
         ///
         /// extension Endpoint {
         ///     var baseURL: String {
@@ -118,6 +149,10 @@ public extension Endpoint {
         return 30
     }
     
+    var httpShouldHandleCookies: Bool {
+        false
+    }
+    
     var isPrintable: Bool {
         return true
     }
@@ -126,15 +161,15 @@ public extension Endpoint {
 // MARK:- Default Methods
 public extension Endpoint {
     
-    func requestDataResult(completion: @escaping DataResult) {
-        DataService.shared.requestDataResult(endpoint: self, completion: completion)
+    func request(completion: @escaping DataResult) {
+        NetworkService.shared.request(endpoint: self, completion: completion)
     }
     
-    func requestDecodedResult<T: Codable>(completion: @escaping DecodedResult<T>) {
-        DataService.shared.requestDecodedResult(endpoint: self, completion: completion)
+    func request<T: Codable>(completion: @escaping DecodedResult<T>) {
+        NetworkService.shared.request(endpoint: self, completion: completion)
     }
     
-    func requestStringResult(completion: @escaping StringResult) {
-        DataService.shared.requestStringResult(endpoint: self, completion: completion)
+    func request(completion: @escaping StringResult) {
+        NetworkService.shared.request(endpoint: self, completion: completion)
     }
 }
