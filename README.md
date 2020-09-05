@@ -1,6 +1,5 @@
 # NetworkKit
 
----
 
 - [Installation](#installation)
 - [Usage](#usage)
